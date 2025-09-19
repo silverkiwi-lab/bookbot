@@ -3,17 +3,15 @@ def get_book_text(filepath):
                 text = f.read()
         return text
 
-def main():
-	from main import book_path
-	text = get_book_text(book_path)
+def num_words(text):
+#	from main import book_path
 	words = text.split()
-	num_words = len(words)
-	phrase = f"{num_words} words found in the document"
-	print(phrase)
+	word_count = len(words)
+	return word_count
+	
 
-def stats():
-	from main import book_path
-	text = get_book_text(book_path)
+def stats(text):
+	#from main import book_path #book_path)
 	lower_words = text.lower()
 	count = {}
 	for x in lower_words:
@@ -21,19 +19,18 @@ def stats():
 			count[x] +=1
 		elif x not in count and x.isalpha():
 			count[x]=1
-	print (count)
+	return (count)
 
-def sorted_report(count)
-	return count[""]
-	print(f"============ BOOKBOT ============
-Analyzing book found at {book_path}...
------------ Word Count ----------
-Found {num_words} total words
---------- Character Count -------
-{count}
-============= END ===============")
+def sort_on(items):
+	return items["num"]
 
-main()
-stats()
+def sorted_report(text):
+	counts = stats(text)
+	sort_count = [
+		{"char": ch, "num": n} for ch, n in counts.items()
+		if ch.isalpha()]
+	sort_count.sort(reverse=True, key=sort_on)
+	return sort_count
 
-#books/frankenstein.txt
+
+#books/frankenstein.txt - for reference this is how filepath is stored.
